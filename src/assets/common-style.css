@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'LibreBaskervilleRegular';
+  src: url('./LibreBaskerville-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'LibreBaskervilleBold';
+  src: url('./LibreBaskerville-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'LibreBaskervilleItalic';
+  src: url('./LibreBaskerville-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: georgia;
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: 'LibreBaskervilleRegular', sans-serif;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.items-between {
+  align-items: space-between;
+}
+
+.item-around {
+  align-items: space-around;
+}
+
+.flex-g-1 {
+  flex-grow: 1;
+}
+
+.flex-s-0 {
+  flex-shrink: 0;
+}

@@ -1,0 +1,28 @@
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="/assets/mathjax.js"></script>
+<header>
+  <!-- Navigation bar -->
+  <% if (isMobile) { %>
+  <nav class="flex flex-column items-center">
+    <div class="header-title">
+      <div>Karshilov</div>
+      <span>Trying is 55.5% of the battle.</span>
+    </div>
+    <div class="flex justify-around" style="padding: 6px 12px">
+      <button class="header-button">About</button>
+    </div>
+  </nav>
+  <% } else { %>
+  <nav
+    style="border-bottom: 1px solid rgb(233, 233, 233)"
+    class="flex items-center justify-between flex-wrap nav-bar"
+  >
+    <img alt="avatar" src="/assets/avatar.jpg" width="36" height="36" />
+    <div class="header-title">
+      <div>Karshilov</div>
+      <span>Trying is 55.5% of the battle.</span>
+    </div>
+    <button class="header-button">About</button>
+  </nav>
+  <% } %>
+</header>
