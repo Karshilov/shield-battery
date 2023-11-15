@@ -1,0 +1,66 @@
+<!--  post: { slug, title, description, banner, date, tags }-->
+<div class="flex-g-1">
+  <% for( let i = (activePage - 1) * 7; i < Math.min(posts.length, activePage * 7); i++ ) { %>
+  <div class="flex" style="padding: 12px 0px">
+    <div class="flex-g-1">
+      <span>
+        <a href="/posts/<%=  posts[i].slug%>" class="post-title"
+          ><%= posts[i].title %></a
+        >
+      </span>
+      <p
+        style="
+          color: rgb(144, 144, 144);
+          margin-bottom: 6px;
+          font-family: sans-serif;
+          font-weight: 300;
+          line-height: 18px;
+          font-size: 14px;
+        "
+      >
+        <%- posts[i].formattedDate %>
+      </p>
+      <p
+        style="
+          font-size: 16px;
+          font-weight: 600;
+          font-family: Arial, Helvetica, sans-serif;
+          margin-bottom: 6px;
+          margin-top: 6px;
+        "
+      >
+        DESCRIPTION
+      </p>
+      <p
+        style="
+          color: rgb(144, 144, 144);
+          margin-top: 6px;
+          font-family: sans-serif;
+          font-weight: 300;
+          line-height: 18px;
+          font-size: 14px;
+        "
+      >
+        <%- posts[i].description %>
+      </p>
+    </div>
+  </div>
+  <% if (i !== posts.length - 1) { %>
+  <div
+    style="
+      width: 100%;
+      height: 1px;
+      background: rgb(233, 233, 233);
+      margin-top: 16px;
+      margin-bottom: 16px;
+    "
+  ></div>
+  <% } %> <% } %>
+  <% if (Math.ceil(posts.length / 7) > 0) { %>
+    <div class="flex justify-center items-center" style="margin-bottom: 16px;">
+       <% for( let i = 0; i < Math.ceil(posts.length / 7); i++ ) { %>
+         <a class="pagination-button <%= (activePage === (i + 1) ? 'active' : '') %>" href="/pages/<%= i+1 %>"><%= i + 1 %></a>
+       <% } %>
+    </div>
+   <% } %>
+</div>

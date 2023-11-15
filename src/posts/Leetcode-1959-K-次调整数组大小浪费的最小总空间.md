@@ -1,7 +1,7 @@
 ---
 title: 'Leetcode #1959 K 次调整数组大小浪费的最小总空间'
 date: 2021-09-23 11:12:00
-description: '久违的 dp 题'
+description: 'From the data range, it can be inferred that this is likely an interval dynamic programming (dp) problem, and indeed it is. The key to solving this problem lies in finding a calculation method for the changes in wasted space resulting from adjusting once. Placed as the third question in the LeetCode weekly contest, it is of slightly higher difficulty, testing the solidity of foundational knowledge.'
 banner: 'https://picsum.photos/300/200'
 tags:
 - 求职

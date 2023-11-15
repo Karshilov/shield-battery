@@ -34,6 +34,19 @@ const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md'));
  */
 const encodedName = (p) => encodeURI(p.split('/posts/').reverse()[0].split('.md')[0] ?? '');
 
+const posts = postNames.map((current) => {
+  const file = read(path.resolve(process.cwd(), './src/posts/', current));
+  return {
+    title: file.data.title,
+    date: file.data.date,
+    formattedDate: formatPublishTime(file.data.date),
+    tags: file.data.tags,
+    description: file.data.description,
+    banner: file.data.banner,
+    slug: encodedName(current),
+  }
+}).sort((a, b) => a.date > b.date ? -1 : 1);
+
 
 /**
  * @param {string} ua
@@ -48,21 +61,29 @@ function checkMobile(ua = '') {
 
 fastify.get('/', async (req, res) => {
   const isMobile = checkMobile(req.headers["user-agent"]);
-  const posts = postNames.map((current) => {
-    const file = read(path.resolve(process.cwd(), './src/posts/', current));
-    return {
-      title: file.data.title,
-      date: file.data.date,
-      tags: file.data.tags,
-      description: file.data.description,
-      banner: file.data.banner,
-      slug: encodedName(current),
-    }
-  }).sort((a, b) => a.date > b.date ? -1 : 1);
-  return res.view('./src/layout/main-page.ejs', {
+  
+  return res.view('./src/layout/page.ejs', {
     posts,
     isMobile,
+    activePage: 1,
   });
+})
+
+/**
+ * pagination route
+ */
+fastify.get('/pages/:id', async (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  // @ts-ignore
+  const { id } = req.params;
+
+  if (!Number.isNaN(Number(id))) {
+    return res.view('./src/layout/page.ejs', {
+      posts,
+      isMobile,
+      activePage: Number(id),
+    });
+  }
 })
 
 /**

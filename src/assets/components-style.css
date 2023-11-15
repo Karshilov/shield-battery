@@ -15,9 +15,13 @@
 }
 
 .post-title {
+  font-family: 'LibreBaskervilleBold', sans-serif;
   box-shadow: inset 0 -0.35em 0 rgba(252, 169, 15, 0.5);
   color: black;
   text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+  display: inline;
 }
 
 .nav-bar {
@@ -66,4 +70,37 @@
 
 .tag-item:active {
   background: rgb(206, 206, 206);
+}
+
+.pagination-button {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 4px;
+  color: black;
+  text-decoration: none;
+}
+
+.pagination-button:hover {
+  background: rgb(233, 233, 233);
+}
+
+.pagination-button:active, .active {
+  background: rgb(206, 206, 206);
+}
+
+.page-container {
+  padding-top: 12px;
+}
+
+.page-container-m {
+  padding-top: 12px;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
 }
