@@ -32,7 +32,7 @@ const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md'));
  * @param {string} p 
  * @returns {string}
  */
-const encodedName = (p) => encodeURI(p.split('/posts').reverse()[0].split('.md')[0] ?? '');
+const encodedName = (p) => encodeURI(p.split('/posts/').reverse()[0].split('.md')[0] ?? '');
 
 
 /**
@@ -78,7 +78,7 @@ fastify.get('/', async (req, res) => {
  */
 
 postNames.forEach((current) => {
-  fastify.get(`/posts${encodedName(current)}`, (req, res) => {
+  fastify.get(`/posts/${encodedName(current)}`, (req, res) => {
     const isMobile = checkMobile(req.headers["user-agent"]);
     if (fs.existsSync(path.resolve(process.cwd(), './src/posts/', current))) {
 
