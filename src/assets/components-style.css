@@ -62,6 +62,7 @@
   padding: 4px;
   border-radius: 4px;
   background: transparent;
+  margin-right: 4px;
 }
 
 .tag-item:hover {

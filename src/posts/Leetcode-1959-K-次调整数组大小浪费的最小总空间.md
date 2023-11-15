@@ -8,7 +8,7 @@ tags:
 - 刷题
 ---
 
-[题目链接](https://leetcode-cn.com/problems/minimum-total-space-wasted-with-k-resizing-operations/)
+> [题目链接](https://leetcode-cn.com/problems/minimum-total-space-wasted-with-k-resizing-operations/)
 ## 思路简述
 + 数据范围经典 $O(n^3)$ 区间dp
 + 首先是设计dp方程，假设 $dp[i][j]$ 表示数组调整到了i位置并用了j次的最优解

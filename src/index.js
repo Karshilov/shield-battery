@@ -25,7 +25,7 @@ fastify.register(require('@fastify/static'), {
 /**
  * posts
  */
-const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md'));
+const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md').replaceAll('\\', '/')).map(v => v.replaceAll('\\', '/'));
 
 /**
  * 
@@ -66,6 +66,7 @@ fastify.get('/', async (req, res) => {
     posts,
     isMobile,
     activePage: 1,
+    pageTitle: 'Karshilov\'s blog',
   });
 })
 
@@ -77,12 +78,42 @@ fastify.get('/pages/:id', async (req, res) => {
   // @ts-ignore
   const { id } = req.params;
 
-  if (!Number.isNaN(Number(id))) {
+  if (Number.isInteger(Number(id)) && (Number(id) <= Math.ceil(posts.length / 7))) {
     return res.view('./src/layout/page.ejs', {
       posts,
       isMobile,
       activePage: Number(id),
+      pageTitle: `Page ${id}`,
     });
+  } else {
+    return res.view('./src/layout/404.ejs', {
+      isMobile,
+      pageTitle: '404 Not Found',
+    })
+  }
+})
+
+/**
+ * tag routes
+ */
+fastify.get('/tags/:tag', async (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  // @ts-ignore
+  const { tag } = req.params;
+  const filteredPosts = posts.filter(post => post.tags.some(cur => cur === tag));
+
+  if (filteredPosts.length) {
+    return res.view('./src/layout/page.ejs', {
+      posts: filteredPosts,
+      isMobile,
+      activePage: 1,
+      pageTitle: `Tag: ${tag}`,
+    });
+  } else {
+    return res.view('./src/layout/404.ejs', {
+      isMobile,
+      pageTitle: '404 Not Found',
+    })
   }
 })
 
@@ -117,13 +148,28 @@ fastify.get(`/posts/:postName`, (req, res) => {
       banner: file.data.banner,
       isMobile,
     });
+  } else {
+    return res.view('./src/layout/404.ejs', {
+      isMobile,
+      pageTitle: '404 Not Found',
+    })
   }
 })
 
 /**
- * archive routes
+ * TODO: archive routes
  */
 
+/**
+ * 404 routes
+ */
+fastify.get('/*', (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  return res.view('./src/layout/404.ejs', {
+    isMobile,
+    pageTitle: '404 Not Found',
+  })
+})
 
 /**
  * start!
