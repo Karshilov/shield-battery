@@ -55,9 +55,10 @@ fastify.get('/', async (req, res) => {
       date: file.data.date,
       tags: file.data.tags,
       description: file.data.description,
+      banner: file.data.banner,
       slug: encodedName(current),
     }
-  });
+  }).sort((a, b) => a.date > b.date ? -1 : 1);
   return res.view('./src/layout/main-page.ejs', {
     posts,
     isMobile,
@@ -76,26 +77,26 @@ fastify.get('/', async (req, res) => {
 /**
  * post-name routes
  */
-
-postNames.forEach((current) => {
-  fastify.get(`/posts/${encodedName(current)}`, (req, res) => {
-    const isMobile = checkMobile(req.headers["user-agent"]);
-    if (fs.existsSync(path.resolve(process.cwd(), './src/posts/', current))) {
-
-      const file = read(path.resolve(process.cwd(), './src/posts/', current));
-      const toc = generateTableOfContent(file.content);
-      const content = markdownRender(file.content);
-      
-      return res.view('./src/layout/post.ejs', {
-        toc,
-        content,
-        pageTitle: file.data.title,
-        tags: file.data.tags,
-        date: formatPublishTime(file.data.date),
-        isMobile,
-      });
-    }
-  })
+fastify.get(`/posts/:postName`, (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  // @ts-ignore
+  const { postName } = req.params;
+  const current = path.resolve(process.cwd(), './src/posts/', `${decodeURI(postName)}.md`);
+  if (fs.existsSync(path.resolve(process.cwd(), './src/posts/', current))) {
+    const file = read(path.resolve(process.cwd(), './src/posts/', current));
+    const toc = generateTableOfContent(file.content);
+    const content = markdownRender(file.content);
+    
+    return res.view('./src/layout/post.ejs', {
+      toc,
+      content,
+      pageTitle: file.data.title,
+      tags: file.data.tags,
+      date: formatPublishTime(file.data.date),
+      banner: file.data.banner,
+      isMobile,
+    });
+  }
 })
 
 /**

@@ -2,6 +2,7 @@
 const { markedHighlight } = require('marked-highlight');
 const { Marked } = require("marked");
 const hljs = require('highlight.js/lib/common').default;
+const markedKatex = require('./katex');
 
 const markdown =  new Marked(markedHighlight({
     langPrefix: 'hljs language-',
@@ -10,6 +11,8 @@ const markdown =  new Marked(markedHighlight({
       return hljs.highlight(code, { language }).value;
     }
   }));
+
+markdown.use(markedKatex({ throwOnError: false }));
 
 const escapedText = (/** @type {string} */ text) =>
   text.toLowerCase().replace(/[^\w]+/g, "-");

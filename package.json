@@ -19,6 +19,7 @@
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
     "html-minifier": "^4.0.0",
+    "katex": "^0.16.9",
     "marked": "^10.0.0",
     "marked-highlight": "^2.0.7"
   },

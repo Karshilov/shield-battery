@@ -2,6 +2,7 @@
 title: Style Test
 date: 2020-02-21 20:25:10
 description: 'just a test post'
+banner: 'https://picsum.photos/300/200'
 tags:
 - test
 - old
