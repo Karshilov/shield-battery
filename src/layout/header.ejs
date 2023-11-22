@@ -1,16 +1,20 @@
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <header>
   <!-- Navigation bar -->
   <% if (isMobile) { %>
-  <nav class="flex flex-column items-center" style="margin-top: 20px;">
+  <nav class="flex flex-column items-center" style="margin-top: 20px">
     <div class="header-title">
       <div>
-        <a href="/" style="color: black; text-decoration: none;">Karshilov</a>
+        <a href="/" style="color: black; text-decoration: none"
+          ><%- firstName %>'s Blog</a
+        >
       </div>
       <span>Trying is 55.5% of the battle.</span>
     </div>
-    <div class="flex justify-around" style="padding: 6px 12px; margin-top: 12px;">
-      <button class="header-button">About</button>
+    <div
+      class="flex justify-around"
+      style="padding: 6px 12px; margin-top: 12px"
+    >
+      <a href="/about" class="header-button">About</a>
     </div>
   </nav>
   <% } else { %>
@@ -18,14 +22,41 @@
     style="border-bottom: 1px solid rgb(233, 233, 233)"
     class="flex items-center justify-between flex-wrap nav-bar"
   >
-    <img alt="avatar" src="/assets/avatar.jpg" width="48" height="48" style="border: 1px solid rgb(192, 192, 192); border-radius: 50%;" />
+    <div
+      class="flex justify-center items-center"
+      style="position: relative; height: 48px; width: 48px"
+    >
+      <img
+        alt="avatar"
+        src="/assets/avatar.jpg"
+        width="48"
+        height="48"
+        style="
+          border: 1px solid rgb(192, 192, 192);
+          border-radius: 50%;
+          position: absolute;
+        "
+      />
+      <a
+        href="/"
+        style="
+          display: block;
+          height: 48px;
+          width: 48px;
+          border-radius: 50%;
+          position: absolute;
+        "
+      ></a>
+    </div>
     <div class="header-title">
       <div>
-        <a href="/" style="color: black; text-decoration: none;">Karshilov</a>
+        <a href="/" style="color: black; text-decoration: none"
+          ><%- firstName %>'s Blog</a
+        >
       </div>
       <span>Trying is 55.5% of the battle.</span>
     </div>
-    <button class="header-button">About</button>
+    <a href="/about" class="header-button">About</a>
   </nav>
   <% } %>
 </header>

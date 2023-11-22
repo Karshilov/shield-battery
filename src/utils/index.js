@@ -1,16 +1,18 @@
 //@ts-check
-const { markedHighlight } = require('marked-highlight');
+const { markedHighlight } = require("marked-highlight");
 const { Marked } = require("marked");
-const hljs = require('highlight.js/lib/common').default;
-const markedKatex = require('./katex');
+const hljs = require("highlight.js/lib/common").default;
+const markedKatex = require("./katex");
 
-const markdown =  new Marked(markedHighlight({
-    langPrefix: 'hljs language-',
+const markdown = new Marked(
+  markedHighlight({
+    langPrefix: "hljs language-",
     highlight(code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      const language = hljs.getLanguage(lang) ? lang : "plaintext";
       return hljs.highlight(code, { language }).value;
-    }
-  }));
+    },
+  })
+);
 
 markdown.use(markedKatex({ throwOnError: false }));
 
@@ -28,6 +30,24 @@ const renderer = {
                 ${text}
             </h${level}>
         `;
+  },
+  /**
+   *
+   * @param {string} href
+   * @param {string | null} title
+   * @param {string} text
+   */
+  image(href, title, text) {
+    if (href === null) {
+      return text;
+    }
+    const fullHref = process.env.CF_DOMAIN + href;
+    let out = `<img src="${fullHref}" alt="${text}"`;
+    if (title) {
+      out += ` title="${title}"`;
+    }
+    out += ">";
+    return out;
   },
 };
 
@@ -47,17 +67,22 @@ module.exports.generateTableOfContent = (content) => {
       const id = escapedText(text);
       const link = `<a href="#${id}" style="color: black;">${text}</a>`;
       result.push(
-        `<li class="toc-item" style="padding-left: ${12 * level}px;">${link}</li>`
+        `<li class="toc-item" style="padding-left: ${
+          12 * level
+        }px;">${link}</li>`
       );
     }
   }
-  return `<ul class="toc">${result.join("")}</ul>`;
+  return result.length ? `<ul class="toc">${result.join("")}</ul>` : "";
 };
 
 module.exports.markdownRender = markdown.parse;
 
-module.exports.formatPublishTime = (/** @type {string | number | Date} */ time) => new Intl.DateTimeFormat('en-US', {
-  dateStyle: 'full',
-  timeStyle: 'long',
-  timeZone: 'Asia/Shanghai',
-}).format(new Date(time));
+module.exports.formatPublishTime = (
+  /** @type {string | number | Date} */ time
+) =>
+  new Intl.DateTimeFormat("en-US", {
+    dateStyle: "full",
+    timeStyle: "long",
+    timeZone: "Asia/Shanghai",
+  }).format(new Date(time));

@@ -7,6 +7,13 @@ const { globSync } = require('glob');
 const { generateTableOfContent, markdownRender, formatPublishTime } = require("./utils");
 const cors = require('@fastify/cors');
 
+require('dotenv').config()
+
+const basicInfo = {
+  fullName: process.env.FULL_NAME,
+  firstName: process.env.FIRST_NAME,
+}
+
 /**
  * register plugins
  */
@@ -25,7 +32,7 @@ fastify.register(require('@fastify/static'), {
 /**
  * posts
  */
-const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md').replaceAll('\\', '/')).map(v => v.replaceAll('\\', '/'));
+const postNames = globSync(path.resolve(process.cwd(), './src/posts/*.md').replace(/\\/g, '/')).map(v => v.replace(/\\/g, '/'));
 
 /**
  * 
@@ -62,12 +69,12 @@ function checkMobile(ua = '') {
 fastify.get('/', async (req, res) => {
   const isMobile = checkMobile(req.headers["user-agent"]);
   
-  return res.view('./src/layout/page.ejs', {
+  return res.view('./src/layout/page.ejs', Object.assign(basicInfo, {
     posts,
     isMobile,
     activePage: 1,
-    pageTitle: 'Karshilov\'s blog',
-  });
+    pageTitle: `${basicInfo.firstName}'s Blog`,
+  }));
 })
 
 /**
@@ -79,17 +86,17 @@ fastify.get('/pages/:id', async (req, res) => {
   const { id } = req.params;
 
   if (Number.isInteger(Number(id)) && (Number(id) <= Math.ceil(posts.length / 7))) {
-    return res.view('./src/layout/page.ejs', {
+    return res.view('./src/layout/page.ejs', Object.assign(basicInfo, {
       posts,
       isMobile,
       activePage: Number(id),
       pageTitle: `Page ${id}`,
-    });
+    }));
   } else {
-    return res.view('./src/layout/404.ejs', {
+    return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
       isMobile,
       pageTitle: '404 Not Found',
-    })
+    }));
   }
 })
 
@@ -103,23 +110,43 @@ fastify.get('/tags/:tag', async (req, res) => {
   const filteredPosts = posts.filter(post => post.tags.some(cur => cur === tag));
 
   if (filteredPosts.length) {
-    return res.view('./src/layout/page.ejs', {
+    return res.view('./src/layout/page.ejs', Object.assign(basicInfo, {
       posts: filteredPosts,
       isMobile,
       activePage: 1,
       pageTitle: `Tag: ${tag}`,
-    });
+    }));
   } else {
-    return res.view('./src/layout/404.ejs', {
+    return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
       isMobile,
       pageTitle: '404 Not Found',
-    })
+    }));
   }
 })
 
 /**
  * about-page route
  */
+fastify.get('/about', (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  try {
+    const file = read(path.resolve(process.cwd(), './src/header-menu-contents/', 'about.md'));
+    const toc = generateTableOfContent(file.content);
+    const content = markdownRender(file.content);
+    return res.view('./src/layout/about.ejs', Object.assign(basicInfo, {
+      isMobile,
+      toc,
+      pageTitle: 'About',
+      content,
+      date: file.data.date,
+    }));
+  } catch (e) {
+    return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
+      isMobile,
+      pageTitle: '404 Not Found',
+    }));
+  }
+})
 
 /** 
  * photography route
@@ -139,7 +166,7 @@ fastify.get(`/posts/:postName`, (req, res) => {
     const toc = generateTableOfContent(file.content);
     const content = markdownRender(file.content);
     
-    return res.view('./src/layout/post.ejs', {
+    return res.view('./src/layout/post.ejs', Object.assign(basicInfo, {
       toc,
       content,
       pageTitle: file.data.title,
@@ -147,12 +174,12 @@ fastify.get(`/posts/:postName`, (req, res) => {
       date: formatPublishTime(file.data.date),
       banner: file.data.banner,
       isMobile,
-    });
+    }));
   } else {
-    return res.view('./src/layout/404.ejs', {
+    return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
       isMobile,
       pageTitle: '404 Not Found',
-    })
+    }));
   }
 })
 
@@ -165,10 +192,10 @@ fastify.get(`/posts/:postName`, (req, res) => {
  */
 fastify.get('/*', (req, res) => {
   const isMobile = checkMobile(req.headers["user-agent"]);
-  return res.view('./src/layout/404.ejs', {
+  return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
     isMobile,
     pageTitle: '404 Not Found',
-  })
+  }));
 })
 
 /**

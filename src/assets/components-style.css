@@ -42,6 +42,8 @@
 
 .header-button {
   background: transparent;
+  text-decoration: none;
+  color: black;
   outline: none;
   border: none;
   padding: 6px 8px;
@@ -95,6 +97,11 @@
   background: rgb(206, 206, 206);
 }
 
+.about-page {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
 .page-container {
   padding-top: 12px;
 }
@@ -104,4 +111,8 @@
   margin-left: 5%;
   margin-right: 5%;
   width: 90%;
+}
+
+.about-link {
+  color: rgb(206, 206, 206);
 }
