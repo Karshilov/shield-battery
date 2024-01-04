@@ -139,7 +139,7 @@ fastify.get('/about', (req, res) => {
       toc,
       pageTitle: 'About',
       content,
-      date: file.data.date,
+      date: formatPublishTime(file.data.date),
     }));
   } catch (e) {
     return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
