@@ -8,6 +8,23 @@
         <div class="about-page <%= isMobile ? 'page-container-m' : 'page-container' %>">
           <p style="font-family: sans-serif; font-size: 14px; color: rgb(102, 102,102);">Last Modified <%= date %></p>
           <div class="md-container">
+            <div class="flex" style="width: 100%; margin-bottom: 16px;">
+              <div style="width: 50%;">
+               <img src="<%= prefix %>self.jpg" style="width: 80%; height: auto; margin: 0;  margin-bottom: 16px;">
+               <div>
+                <a href="https://github.com/Karshilov" class="about-link">Github</a>
+                /
+                <a href="mailto:karshilov@foxmail.com" class="about-link">Email</a>
+            </div>
+              </div>
+              <div style="width: 50%;">
+              <h4 style="margin-top: 0px;">Youyuan Liu</h4>
+              <p>Ph.D. Student</p>
+              <p>Former Frontend Developer at Alibaba Inc.</p>
+              <p>Obtained my Bachelor's degree in Artificial Intelligence from <a class="about-link" href="https://www.seu.edu.cn">Southeast University</a>.</p>
+              <p>Nothing else worthy.</p>
+              </div>
+            </div>
             <%- content %>
           </div>
         </div>

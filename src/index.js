@@ -1,4 +1,6 @@
 //@ts-check
+require('dotenv').config()
+
 const fastify = require("fastify")();
 const path = require('path');
 const fs = require('fs');
@@ -7,11 +9,10 @@ const { globSync } = require('glob');
 const { generateTableOfContent, markdownRender, formatPublishTime } = require("./utils");
 const cors = require('@fastify/cors');
 
-require('dotenv').config()
-
 const basicInfo = {
   fullName: process.env.FULL_NAME,
   firstName: process.env.FIRST_NAME,
+  prefix: process.env.CF_DOMAIN,
 }
 
 /**
