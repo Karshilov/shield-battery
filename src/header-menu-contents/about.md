@@ -2,7 +2,7 @@
 date: 2023-11-16 11:12:00
 ---
 
-I will go to Temple University in Jan 2024 for the Ph.D. Program in Computer and Information Systems. And I'm honored to be advised by Sian Jin, and do some research about high-performance computing, especially data compression.
+I'm a Ph.D student in Temple University. And I'm honored to be advised by [Sian Jin](https://sianjin.com), and do some research about high-performance computing, especially data compression.
 
 Throughout my brief career, which includes a one-year internship and four months of full-time work, I have primarily worked as a frontend developer with a focus on developing spreadsheet-like applications such as Lark Bitable and Alidocs Notable. One of the biggest challenges that I tackled during this time was improving the performance of the formula engine in these applications. This particular issue was the one that I found most intriguing and engaging.
 
