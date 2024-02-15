@@ -1,4 +1,5 @@
 @import './paper.css';
+@import './variables.css';
 
 * {
   box-sizing: border-box;
@@ -36,6 +37,8 @@ html {
   margin: 0px;
   padding: 0px;
   font-family: georgia;
+  color: var(--text-color);
+  background: var(--background-color);
 }
 
 .flex {

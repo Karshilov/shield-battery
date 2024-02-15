@@ -65,7 +65,7 @@ module.exports.generateTableOfContent = (content) => {
       const level = token.depth;
       const text = token.text;
       const id = escapedText(text);
-      const link = `<a href="#${id}" style="color: black;">${text}</a>`;
+      const link = `<a href="#${id}" style="color: var(--text-color);">${text}</a>`;
       result.push(
         `<li class="toc-item" style="padding-left: ${
           12 * level

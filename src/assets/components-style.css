@@ -1,11 +1,12 @@
+@import './variables.css';
 .toc {
   position: fixed;
   top: 15vh;
   padding: 8px;
   width: 240px;
-  background-color: #f8f8f8;
+  background-color: var(--secondary-background-color);
   border-radius: 6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 5px var(--box-shadow-color);
 }
 
 .toc-item {
@@ -17,7 +18,7 @@
 .post-title {
   font-family: 'LibreBaskervilleBold', sans-serif;
   box-shadow: inset 0 -0.35em 0 rgba(252, 169, 15, 0.5);
-  color: black;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 2rem;
   font-weight: bold;
@@ -35,7 +36,7 @@
 }
 
 .header-title > span {
-  color: rgb(102, 102, 102);
+  color: var(--secondary-text-color);
   font-size: 14px;
   margin-top: 4px;
 }
@@ -43,7 +44,7 @@
 .header-button {
   background: transparent;
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   outline: none;
   border: none;
   padding: 6px 8px;
@@ -53,11 +54,11 @@
 }
 
 .header-button:hover {
-  background: rgb(233, 233, 233);
+  background: var(--hover-color);
 }
 
 .header-button:active {
-  background: rgb(206, 206, 206);
+  background: var(--active-color);
 }
 
 .tag-item {
@@ -68,11 +69,11 @@
 }
 
 .tag-item:hover {
-  background: rgb(233, 233, 233);
+  background: var(--hover-color);
 }
 
 .tag-item:active {
-  background: rgb(206, 206, 206);
+  background: var(--active-color);
 }
 
 .pagination-button {
@@ -85,16 +86,16 @@
   margin-left: 4px;
   margin-right: 4px;
   border-radius: 4px;
-  color: black;
+  color: var(--text-color);
   text-decoration: none;
 }
 
 .pagination-button:hover {
-  background: rgb(233, 233, 233);
+  background: var(--hover-color);
 }
 
 .pagination-button:active, .active {
-  background: rgb(206, 206, 206);
+  background: var(--active-color);
 }
 
 .about-page {
@@ -114,5 +115,5 @@
 }
 
 .about-link {
-  color: rgb(206, 206, 206);
+  color: var(--secondary-text-color);
 }
