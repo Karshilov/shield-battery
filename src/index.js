@@ -153,6 +153,16 @@ fastify.get('/about', (req, res) => {
  * photography route
  */
 
+/**
+ * publication route
+ */
+fastify.get('/publications', (req, res) => {
+  const isMobile = checkMobile(req.headers["user-agent"]);
+  return res.view('./src/layout/publications.ejs', Object.assign(basicInfo, {
+    isMobile,
+    pageTitle: 'Publications',
+  }));
+})
 
 /**
  * post-name routes

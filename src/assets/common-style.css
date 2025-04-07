@@ -96,3 +96,11 @@ html {
 .flex-s-0 {
   flex-shrink: 0;
 }
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
