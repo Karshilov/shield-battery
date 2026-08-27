@@ -130,16 +130,19 @@ fastify.get('/tags/:tag', async (req, res) => {
  */
 fastify.get('/about', (req, res) => {
   const isMobile = checkMobile(req.headers["user-agent"]);
+
   try {
-    const file = read(path.resolve(process.cwd(), './src/header-menu-contents/', 'about.md'));
-    const toc = generateTableOfContent(file.content);
-    const content = markdownRender(file.content);
+    const aboutPath = path.resolve(
+      process.cwd(),
+      './src/layout/about.ejs'
+    );
+
+    const modifiedTime = fs.statSync(aboutPath).mtime;
+
     return res.view('./src/layout/about.ejs', Object.assign(basicInfo, {
       isMobile,
-      toc,
       pageTitle: 'About',
-      content,
-      date: formatPublishTime(file.data.date),
+      date: formatPublishTime(modifiedTime),
     }));
   } catch (e) {
     return res.view('./src/layout/404.ejs', Object.assign(basicInfo, {
