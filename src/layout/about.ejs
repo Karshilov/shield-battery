@@ -4,32 +4,65 @@
   <body>
     <div style="width: 100%; height: 100%; overflow: auto;">
       <%- include('header') %>
+
       <div class="flex" style="width: 100%; min-height: calc(100vh - 154px);">
         <div class="<%= isMobile ? 'page-container-m' : 'page-container' %> about-page">
-          <p style="font-family: sans-serif; font-size: 14px; color: rgb(102, 102,102);">Last Modified <%= date %></p>
+          <p style="font-family: sans-serif; font-size: 14px; color: rgb(102, 102, 102);">
+            Last Modified <%= date %>
+          </p>
+
           <div class="md-container">
             <div class="flex" style="width: 100%; margin-bottom: 16px;">
               <div style="width: 50%;">
-               <img src="<%= prefix %>self.jpg" style="width: 80%; height: auto; margin: 0;  margin-bottom: 16px;">
-               <div>
-                <a href="https://github.com/Karshilov" class="about-link">Github</a>
-                /
-                <a href="mailto:karshilov@foxmail.com" class="about-link">Email</a>
-            </div>
+                <img
+                  src="<%= prefix %>self.jpg"
+                  style="width: 80%; height: auto; margin: 0; margin-bottom: 16px;"
+                >
+
+                <div>
+                  <a href="https://github.com/Karshilov" class="about-link">GitHub</a>
+                  /
+                  <a href="mailto:karshilov@foxmail.com" class="about-link">Email</a>
+                  /
+                  <a href="https://scholar.google.com/citations?user=wJ8qrbwAAAAJ&hl=en" class="about-link">Google Scholar</a>
+                  /
+                  <a href="https://orcid.org/0009-0002-6353-3659" class="about-link">ORCID</a>
+                </div>
               </div>
+
               <div style="width: 50%;">
-              <h4 style="margin-top: 0px;">Youyuan Liu</h4>
-              <p>Ph.D. Student</p>
-              <p>Former Frontend Developer at Alibaba Inc.</p>
-              <p>Obtained my Bachelor's degree in Artificial Intelligence from <a class="about-link" href="https://www.seu.edu.cn">Southeast University</a>.</p>
-              <p>Nothing else worthy.</p>
+                <h4 style="margin-top: 0px;">Youyuan Liu</h4>
+
+                <p>
+                  Youyuan Liu is a third-year Ph.D. student at Temple University,
+                  advised by
+                  <a href="https://www.sianjin.com/" class="about-link">Dr. Sian Jin</a>.
+                  His research focuses on high-performance computing, with a particular
+                  interest in lossy compression for scientific data. His work has appeared
+                  at leading conferences, including HPDC, ICS, VLDB, and SC.
+                </p>
+
+                <p>
+                  He is also a long-term visiting student at Argonne National Laboratory,
+                  working on compression and scheduling under the supervision of
+                  <a href="https://www.anl.gov/profile/robert-underwood" class="about-link">Dr. Robert Underwood</a>.
+                </p>
+
+                <h4>Academic Service</h4>
+                <p>
+                  Reviewer:
+                  Journal of Parallel and Distributed Computing (JPDC), 2026;
+                  IEEE Transactions on Parallel and Distributed Systems (TPDS), 2026.
+                </p>
               </div>
             </div>
+
             <%- content %>
           </div>
         </div>
       </div>
+
       <%- include('footer') %>
-    </body>
     </div>
+  </body>
 </html>
